@@ -96,7 +96,8 @@ public class homeWork2906 {
                     break;
                     case 1
                        // move chars
-                        for (int e1 = 0; e1 < number; e1++) {
+
+for (int e1 = 0; e1 < number; e1++) {
                         temp = charLine[charLine.length-1];
                         for (int e2 = charLine.length-1; e2 > finish+1  ; e2--) {
                             charLine[e2] = charLine[e2-1];
@@ -136,6 +137,7 @@ public class homeWork2906 {
 */
 
         //#1 REGEX finding digits in string
+        //new comment
         Pattern pattern = Pattern.compile("\\d+");
         String word = "test123test444test";
         StringBuilder sb = new StringBuilder();
