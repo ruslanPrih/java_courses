@@ -147,7 +147,7 @@ public class homeWork2906 {
             String value = word.substring(matcher.start(), matcher.end());
             int result = Integer.parseInt(value);
             sum += result;
-            System.out.println("found "+result);
+            System.out.println("found number "+result);
             start = matcher.end();
         }
         System.out.println("Sum of them "+sum);
