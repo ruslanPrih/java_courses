@@ -3,7 +3,7 @@ package com.prikhodko;
 /**
  * Created by руслан on 01.07.2017.
  */
-public class Classes0107 {
+public class ClassesMethods0107 {
 
 
     private static double calc(double a, double b, String operator) {
