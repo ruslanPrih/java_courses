@@ -22,8 +22,6 @@ public class Second {
         CheckValue.check(value<0||value>59, message_error);
         if (value >= 0 && value <= 59) {
             this.value = value;
-        } else {
-            throw new IllegalArgumentException(message_error);
         }
     }
 

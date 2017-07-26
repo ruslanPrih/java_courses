@@ -4,8 +4,7 @@ package com.prikhodko.watches;
  * Created by руслан on 22.07.2017.
  */
 public class Test {
-    public Test() {
-    }
+
 
     public static void main(String[] args) {
         Second a = new Second(45);
@@ -26,15 +25,13 @@ public class Test {
         System.out.println(a);
 
 
-        Hour c= new Hour(6);
-        System.out.println(c);
-        c.addValue(2);
-        System.out.println(c);
+        Hour c = new Hour(6);
         System.out.println(c.getValue());
         c.setValue(5);
-        System.out.println(c);
         System.out.println(c.getValue());
         System.out.println(c);
+
+
     }
 
 }

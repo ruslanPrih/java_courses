@@ -4,33 +4,33 @@ package com.prikhodko.watches;
  * Created by руслан on 22.07.2017.
  */
 public class Hour extends Minute {
-    private int hour;
-   // public Hour () {super();}
+    private int value;
 
-    public Hour (int hour) {
-        CheckValue.check(hour<0||hour>11, message_error);
-        this.hour = hour;
+    public Hour (int value) {
+        super(value);
+        CheckValue.check(value<0||value>11, message_error);
+        this.value = value;
     }
 
     @Override
-    public void setValue(int hour) {
-        CheckValue.check(hour<0||hour>11, message_error);
-        if (hour >= 0 || hour < 12) {
-            this.hour = hour;
-        } else {
-            throw new IllegalArgumentException(message_error);
+    public void setValue(int value) {
+        CheckValue.check(value<0||value>11, message_error);
+        if (value >= 0 || value < 12) {
+            this.value = value;
         }
     }
-/*
-    public int gethour() {
-        return this.hour;
+    public int getValue() {
+        return this.value;
     }
-*/
     @Override
-    public void addValue(int hour) {
-        int d = (hour + this.getValue());
+    public void addValue(int value) {
+        int d = (value + this.getValue());
         this.setValue(d % 12);
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() +"s" +" " + this.value;
+    }
 
 }

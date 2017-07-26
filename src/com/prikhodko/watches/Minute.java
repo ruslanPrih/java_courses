@@ -5,12 +5,12 @@ package com.prikhodko.watches;
  */
 public class Minute extends Second {
 
-    private int minute;
+    private int value;
     public Minute() {}
 
-    public Minute(int minute) {
-        super(minute);
-        this.minute=minute;
+    public Minute(int value) {
+        super(value);
+        this.value=value;
     }
 
 
