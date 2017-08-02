@@ -1,13 +1,13 @@
 package com.prikhodko.testTask2907;
 
-//import java.util.Arrays;
-
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Arrays;
+import java.util.Comparator;
 
 
 /**
@@ -102,8 +102,7 @@ public class Journal {
             throw new IllegalArgumentException("Data cant be null!");
         for (int i = 0; i < this.records.length; i++) {
             Date date = format.parse(this.records[i].toString().substring(0, 18));
-            if ( date.after(fromDate) && date.before(toDate))
-            {
+            if (date.after(fromDate) && date.before(toDate)) {
                 result[counter] = records[i];
                 counter++;
             }
@@ -113,7 +112,21 @@ public class Journal {
         return this;
     }
 
-
+    public void sortByDate() {
+        if (this == null)
+            throw new IllegalArgumentException("Data cant be null!");
+        Arrays.sort(this.records, new SortWithDate());
+    }
+    class SortWithDate implements Comparator<Record> {
+        public int compare(Record obj1, Record obj2) {
+            if (obj1!=null && obj2!=null) {
+                String dateString1 = obj1.toString().substring(0, 18);
+                String dateString2 = obj2.toString().substring(0, 18);
+                return dateString1.compareTo(dateString2);
+            }
+            return  0;
+        }
+    }
     @Override
     public String toString() {
         return "Journal{" +

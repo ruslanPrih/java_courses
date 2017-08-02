@@ -16,10 +16,13 @@ public class TestErrors {
         System.out.println(r);
         Record r1=new Record("2017-07-30 18:08:12 !     cetre OK");
         System.out.println(r1);
+        Record r2=new Record("2017-07-31 18:08:12 !     cetre OK");
+        System.out.println(r1);
 
         Journal j= new Journal();
         j.add(r);
         j.add(r1);
+        j.add(r2);
         System.out.println(j);
        // j.remove(0);
         //System.out.println(j);
@@ -30,13 +33,20 @@ public class TestErrors {
        // System.out.println(j);
         //j.removeAll();
        // System.out.println(j);
+        /*
         Journal j1= new Journal();
         j1.add(r);
         j1.add(r1);
         j.add(j1);
         System.out.println(j);
         j.filter("2017");
+        */
+
+        j.sortByDate();
         System.out.println(j);
+
+
+
 
     }
 }
