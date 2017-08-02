@@ -2,7 +2,13 @@ package com.prikhodko.testTask2907;
 
 //import java.util.Arrays;
 
+import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Calendar;
+
 
 /**
  * Created by руслан on 30.07.2017.
@@ -23,7 +29,7 @@ public class Journal {
     }
 
     public void add(Journal j) {
-        int length = this.records.length+j.records.length;
+        int length = this.records.length + j.records.length;
         Record[] result = new Record[length];
         System.arraycopy(this.records, 0, result, 0, this.count);
         System.arraycopy(j.records, 0, result, this.count, j.count);
@@ -45,6 +51,7 @@ public class Journal {
     }
 
     public void remove(int index) {
+        if (index < 0 || index >= records.length) throw new IllegalArgumentException("Index is out of range!");
         if (records != null) {
             if (index != records.length - 1) {
                 count--;
@@ -71,6 +78,41 @@ public class Journal {
         count = 0;
     }
 
+    public Journal filter(String s) {
+        int counter = 0;
+        Record[] result = new Record[this.records.length];
+        if (this == null)
+            throw new IllegalArgumentException("Data cant be null!");
+        for (int i = 0; i < this.records.length; i++) {
+            if (this.records[i] != null && this.records[i].toString().contains(s)) {
+                result[counter] = records[i];
+                counter++;
+            }
+        }
+        this.count = counter;
+        this.records = result;
+        return this;
+    }
+
+    public Journal filter(Date fromDate, Date toDate) throws ParseException {
+        int counter = 0;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Record[] result = new Record[this.records.length];
+        if (this == null)
+            throw new IllegalArgumentException("Data cant be null!");
+        for (int i = 0; i < this.records.length; i++) {
+            Date date = format.parse(this.records[i].toString().substring(0, 18));
+            if ( date.after(fromDate) && date.before(toDate))
+            {
+                result[counter] = records[i];
+                counter++;
+            }
+        }
+        this.count = counter;
+        this.records = result;
+        return this;
+    }
+
 
     @Override
     public String toString() {
@@ -79,4 +121,5 @@ public class Journal {
                 ", records=" + Arrays.toString(records) +
                 '}';
     }
+
 }

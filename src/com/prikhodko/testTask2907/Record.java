@@ -18,7 +18,6 @@ public class Record {
 
     private String message;
 
-
     public Record(Date dateTime, int importance, String source, String errorMessage) {
         this.dateTime = dateTime;
         this.importance = importance;
@@ -29,6 +28,10 @@ public class Record {
 
     public Record(String message) {
         this.message = message;
+    }
+
+    public Date GetTime (){
+        return this.dateTime;
     }
 
     private String SetMessage() {

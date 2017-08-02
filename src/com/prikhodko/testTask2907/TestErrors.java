@@ -35,5 +35,8 @@ public class TestErrors {
         j1.add(r1);
         j.add(j1);
         System.out.println(j);
+        j.filter("2017");
+        System.out.println(j);
+
     }
 }
