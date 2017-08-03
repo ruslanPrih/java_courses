@@ -30,13 +30,9 @@ public class Record {
         this.message = message;
     }
 
-    public Date GetTime (){
-        return this.dateTime;
-    }
-
     private String SetMessage() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String[] impMessage = {".    ", "!    ", "!!!  ", "!!!!!"};
+        String[] impMessage = {" ", ".    ", "!    ", "!!!  ", "!!!!!"};
         message = dateFormat.format(this.dateTime) + " " + impMessage[this.importance] + " " + this.source + " " + this.errorMessage;
         return message;
     }

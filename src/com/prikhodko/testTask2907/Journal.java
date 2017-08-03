@@ -110,21 +110,43 @@ public class Journal {
         return this;
     }
 
+/*
+        public void sortByDate() {
+            if (this == null)
+                throw new IllegalArgumentException("Data cant be null!");
+            Arrays.sort(this.records, new SortWithDate());
+        }
+
+        static class SortWithDate implements Comparator<Record> {
+            @Override
+            public int compare(Record obj1, Record obj2) {
+                if (obj1 != null && obj2 != null) {
+                    String dateString1 = obj1.toString().substring(0, 18);
+                    String dateString2 = obj2.toString().substring(0, 18);
+                    return dateString1.compareTo(dateString2);
+                }
+                return 0;
+            }
+        }
+ */
+
     public void sortByDate() {
         if (this == null)
             throw new IllegalArgumentException("Data cant be null!");
-        Arrays.sort(this.records, new SortWithDate());
+        Arrays.sort(this.records, new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            String dateString1 = obj1.toString().substring(0, 18);
+                            String dateString2 = obj2.toString().substring(0, 18);
+                            return dateString1.compareTo(dateString2);
+                        }
+                        return 0;
+                    }
+                }
+        );
     }
-    class SortWithDate implements Comparator<Record> {
-        public int compare(Record obj1, Record obj2) {
-            if (obj1!=null && obj2!=null) {
-                String dateString1 = obj1.toString().substring(0, 18);
-                String dateString2 = obj2.toString().substring(0, 18);
-                return dateString1.compareTo(dateString2);
-            }
-            return  0;
-        }
-    }
+
     @Override
     public String toString() {
         return "Journal{" +
