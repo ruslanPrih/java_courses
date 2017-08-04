@@ -17,7 +17,9 @@ public class Journal {
      */
     private int count;
     private Record[] records;
-
+    /**
+     * Add records
+     */
     //The lenth of massive??
     public void add(Record r) {
         if (r == null)
@@ -34,7 +36,9 @@ public class Journal {
         this.records = result;
         this.count = this.count + j.count;
     }
-
+    /**
+     * Remove records
+     */
     // DO we need to erase all found records??
     public void remove(Record r) {
         int index;
@@ -75,7 +79,9 @@ public class Journal {
         records = null;
         count = 0;
     }
-
+    /**
+     * Filter Journal
+     */
     public Journal filter(String s) {
         int counter = 0;
         Record[] result = new Record[this.records.length];
@@ -99,7 +105,7 @@ public class Journal {
         if (this == null)
             throw new IllegalArgumentException("Data cant be null!");
         for (int i = 0; i < this.records.length; i++) {
-            Date date = format.parse(this.records[i].toString().substring(0, 18));
+            Date date = format.parse(this.records[i].toString().substring(0, 20));
             if (date.after(fromDate) && date.before(toDate)) {
                 result[counter] = records[i];
                 counter++;
@@ -109,27 +115,9 @@ public class Journal {
         this.records = result;
         return this;
     }
-
-/*
-        public void sortByDate() {
-            if (this == null)
-                throw new IllegalArgumentException("Data cant be null!");
-            Arrays.sort(this.records, new SortWithDate());
-        }
-
-        static class SortWithDate implements Comparator<Record> {
-            @Override
-            public int compare(Record obj1, Record obj2) {
-                if (obj1 != null && obj2 != null) {
-                    String dateString1 = obj1.toString().substring(0, 18);
-                    String dateString2 = obj2.toString().substring(0, 18);
-                    return dateString1.compareTo(dateString2);
-                }
-                return 0;
-            }
-        }
- */
-
+    /**
+     * Sort by...
+     */
     public void sortByDate() {
         if (this == null)
             throw new IllegalArgumentException("Data cant be null!");
@@ -137,8 +125,8 @@ public class Journal {
                     @Override
                     public int compare(Record obj1, Record obj2) {
                         if (obj1 != null && obj2 != null) {
-                            String dateString1 = obj1.toString().substring(0, 18);
-                            String dateString2 = obj2.toString().substring(0, 18);
+                            String dateString1 = obj1.toString().substring(0, 20);
+                            String dateString2 = obj2.toString().substring(0, 20);
                             return dateString1.compareTo(dateString2);
                         }
                         return 0;
@@ -147,12 +135,147 @@ public class Journal {
         );
     }
 
+
+    public void sortByImportanceDate() {
+        if (this == null)
+            throw new IllegalArgumentException("Data cant be null!");
+        Arrays.sort(this.records, new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            int importence1 = FindImportanceIndex(obj1.toString().substring(20).trim().substring(0, 5));
+                            int importence2 = FindImportanceIndex(obj2.toString().substring(20).trim().substring(0, 5));
+
+                            if (importence1 > importence2) {
+                                return 1;
+                            } else if (importence1 < importence2) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                        return 0;
+                    }
+
+                    int FindImportanceIndex(String s) {
+                        int importanceIndex = 0;
+                        String[] impMessage = {" ", ".    ", "!    ", "!!!  ", "!!!!!"};
+                        for (int i = 1; i < s.length(); i++) {
+                            if (s.equals(impMessage[i])) {
+                                importanceIndex = i;
+                            }
+                        }
+                        return importanceIndex;
+                    }
+                }.thenComparing(new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            String dateString1 = obj1.toString().substring(0, 19);
+                            String dateString2 = obj2.toString().substring(0, 19);
+                            return dateString1.compareTo(dateString2);
+                        }
+                        return 0;
+                    }
+
+                })
+        );
+    }
+
+    public void sortByImportanceSourceDate() {
+        if (this == null)
+            throw new IllegalArgumentException("Data cant be null!");
+        Arrays.sort(this.records, new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            int importence1 = FindImportanceIndex(obj1.toString().substring(20).trim().substring(0, 5));
+                            int importence2 = FindImportanceIndex(obj2.toString().substring(20).trim().substring(0, 5));
+
+                            if (importence1 > importence2) {
+                                return 1;
+                            } else if (importence1 < importence2) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                        return 0;
+                    }
+
+                    int FindImportanceIndex(String s) {
+                        int importanceIndex = 0;
+                        String[] impMessage = {" ", ".    ", "!    ", "!!!  ", "!!!!!"};
+                        for (int i = 1; i < s.length(); i++) {
+                            if (s.equals(impMessage[i])) {
+                                importanceIndex = i;
+                            }
+                        }
+                        return importanceIndex;
+                    }
+                }.thenComparing(new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            String source1 = obj1.toString().substring(20).trim().substring(5).trim().substring
+                                    (0, obj1.toString().substring(20).trim().substring(5).trim().indexOf(" "));
+                            String source2 = obj2.toString().substring(20).trim().substring(5).trim().substring
+                                    (0, obj2.toString().substring(20).trim().substring(5).trim().indexOf(" "));
+                            return source1.compareTo(source2);
+                        }
+                        return 0;
+                    }
+                }).thenComparing(new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            String dateString1 = obj1.toString().substring(0, 20);
+                            String dateString2 = obj2.toString().substring(0, 20);
+                            return dateString1.compareTo(dateString2);
+                        }
+                        return 0;
+                    }
+
+                })
+        );
+    }
+
+    public void sortBySourceDate(){
+        if (this == null)
+            throw new IllegalArgumentException("Data cant be null!");
+        Arrays.sort(this.records, new Comparator<Record>() {
+            @Override
+            public int compare(Record obj1, Record obj2) {
+                if (obj1 != null && obj2 != null) {
+                    String source1 = obj1.toString().substring(20).trim().substring(5).trim().substring
+                            (0, obj1.toString().substring(20).trim().substring(5).trim().indexOf(" "));
+                    String source2 = obj2.toString().substring(20).trim().substring(5).trim().substring
+                            (0, obj2.toString().substring(20).trim().substring(5).trim().indexOf(" "));
+                    return source1.compareTo(source2);
+                }
+                return 0;
+            }
+        }.thenComparing(new Comparator<Record>() {
+            @Override
+            public int compare(Record obj1, Record obj2) {
+                if (obj1 != null && obj2 != null) {
+                    String dateString1 = obj1.toString().substring(0, 20);
+                    String dateString2 = obj2.toString().substring(0, 20);
+                    return dateString1.compareTo(dateString2);
+                }
+                return 0;
+            }
+                })
+        );
+    }
+
     @Override
     public String toString() {
         return "Journal{" +
                 "count=" + count +
-                ", records=" + Arrays.toString(records) +
+                ", records="
+                + "\n_______Date______+Importance+Source+Message"
+                + Arrays.toString(records) +
                 '}';
     }
-
 }

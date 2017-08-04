@@ -42,6 +42,6 @@ public class Record {
      */
     @Override
     public String toString() {
-        return message;
+        return "\n" + message;
     }
 }
