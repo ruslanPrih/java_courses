@@ -17,6 +17,7 @@ public class Journal {
      */
     private int count;
     private Record[] records;
+
     /**
      * Add records
      */
@@ -29,6 +30,8 @@ public class Journal {
     }
 
     public void add(Journal j) {
+        if (j == null)
+            throw new IllegalArgumentException("Data cant be null!");
         int length = this.records.length + j.records.length;
         Record[] result = new Record[length];
         System.arraycopy(this.records, 0, result, 0, this.count);
@@ -36,6 +39,7 @@ public class Journal {
         this.records = result;
         this.count = this.count + j.count;
     }
+
     /**
      * Remove records
      */
@@ -79,6 +83,7 @@ public class Journal {
         records = null;
         count = 0;
     }
+
     /**
      * Filter Journal
      */
@@ -102,22 +107,29 @@ public class Journal {
         int counter = 0;
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Record[] result = new Record[this.records.length];
-        if (this == null)
-            throw new IllegalArgumentException("Data cant be null!");
-        for (int i = 0; i < this.records.length; i++) {
-            Date date = format.parse(this.records[i].toString().substring(0, 20));
-            if (date.after(fromDate) && date.before(toDate)) {
-                result[counter] = records[i];
-                counter++;
+        try {
+            if (this == null) throw new IllegalArgumentException("Data cant be null!");
+            for (int i = 0; i < this.records.length; i++) {
+                if (records[i] != null) {
+                    Date date = format.parse(this.records[i].toString().substring(0, 20).replaceAll("\\p{Cntrl}", ""));
+                    if (date.after(fromDate) && date.before(toDate)) {
+                        result[counter] = records[i];
+                        counter++;
+                    }
+                }
             }
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
         this.count = counter;
         this.records = result;
         return this;
     }
+
     /**
      * Sort by...
      */
+
     public void sortByDate() {
         if (this == null)
             throw new IllegalArgumentException("Data cant be null!");
@@ -134,7 +146,6 @@ public class Journal {
                 }
         );
     }
-
 
     public void sortByImportanceDate() {
         if (this == null)
@@ -240,31 +251,31 @@ public class Journal {
         );
     }
 
-    public void sortBySourceDate(){
+    public void sortBySourceDate() {
         if (this == null)
             throw new IllegalArgumentException("Data cant be null!");
         Arrays.sort(this.records, new Comparator<Record>() {
-            @Override
-            public int compare(Record obj1, Record obj2) {
-                if (obj1 != null && obj2 != null) {
-                    String source1 = obj1.toString().substring(20).trim().substring(5).trim().substring
-                            (0, obj1.toString().substring(20).trim().substring(5).trim().indexOf(" "));
-                    String source2 = obj2.toString().substring(20).trim().substring(5).trim().substring
-                            (0, obj2.toString().substring(20).trim().substring(5).trim().indexOf(" "));
-                    return source1.compareTo(source2);
-                }
-                return 0;
-            }
-        }.thenComparing(new Comparator<Record>() {
-            @Override
-            public int compare(Record obj1, Record obj2) {
-                if (obj1 != null && obj2 != null) {
-                    String dateString1 = obj1.toString().substring(0, 20);
-                    String dateString2 = obj2.toString().substring(0, 20);
-                    return dateString1.compareTo(dateString2);
-                }
-                return 0;
-            }
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            String source1 = obj1.toString().substring(20).trim().substring(5).trim().substring
+                                    (0, obj1.toString().substring(20).trim().substring(5).trim().indexOf(" "));
+                            String source2 = obj2.toString().substring(20).trim().substring(5).trim().substring
+                                    (0, obj2.toString().substring(20).trim().substring(5).trim().indexOf(" "));
+                            return source1.compareTo(source2);
+                        }
+                        return 0;
+                    }
+                }.thenComparing(new Comparator<Record>() {
+                    @Override
+                    public int compare(Record obj1, Record obj2) {
+                        if (obj1 != null && obj2 != null) {
+                            String dateString1 = obj1.toString().substring(0, 20);
+                            String dateString2 = obj2.toString().substring(0, 20);
+                            return dateString1.compareTo(dateString2);
+                        }
+                        return 0;
+                    }
                 })
         );
     }
@@ -272,10 +283,11 @@ public class Journal {
     @Override
     public String toString() {
         return "Journal{" +
-                "count=" + count +
-                ", records="
+                "includes " + count +
+                " records="
                 + "\n_______Date______+Importance+Source+Message"
                 + Arrays.toString(records) +
                 '}';
+
     }
 }
