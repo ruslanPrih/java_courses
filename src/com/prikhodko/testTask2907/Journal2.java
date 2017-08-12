@@ -1,10 +1,7 @@
 package com.prikhodko.testTask2907;
 
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
 import java.util.Comparator;
 
 public class Journal2 {
@@ -99,24 +96,19 @@ public class Journal2 {
         return this;
     }
 
-    public Journal2 filter(Date fromDate, Date toDate) throws ParseException {
+    public Journal2 filter(Date fromDate, Date toDate) {
         int counter = 0;
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Record2[] result = new Record2[this.records.length];
-        try {
             if (this == null) throw new IllegalArgumentException("Data cant be null!");
             for (int i = 0; i < this.records.length; i++) {
                 if (records[i] != null) {
-                    Date date = format.parse(this.records[i].toString().substring(0, 20).replaceAll("\\p{Cntrl}", ""));
+                    Date date = this.records[i].getDateTime();
                     if (date.after(fromDate) && date.before(toDate)) {
                         result[counter] = records[i];
                         counter++;
                     }
                 }
             }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
         this.count = counter;
         this.records = result;
         return this;
