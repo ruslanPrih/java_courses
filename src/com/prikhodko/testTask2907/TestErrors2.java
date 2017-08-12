@@ -18,7 +18,7 @@ public class TestErrors2 {
         Record2 r3 = new Record2(date, 3, "cetre3", "OK");
         Record2 r4 = new Record2("2017-07-30 18:08:12 !        cetre1 OK");
         Record2 r5 = new Record2("2017-07-30 18:08:12 !!!   cetre2   O  K");
-        Record2 r6 = new Record2("2017-07-30 18:08:12 !!!!! cetre3 OK");
+        Record2 r6 = new Record2("2017-07-30 18:08:12 !!!!! cetresd3 OK");
         Record2 r7 = new Record2("2017-07-31 18:08:17 !     cetre4 OK");
         Record2 r8 = new Record2("2017-07-31 18:08:17 !!!   cetre5 OK");
         Record2 r9 = new Record2("2017-07-31 18:08:17 !!!!! cetre6 OK");
