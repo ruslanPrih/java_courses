@@ -30,4 +30,8 @@ public class Point3D extends Point2D {
                 "z="+z+
                 "}"+super.toString();
     }
+    @Override
+    public Point3D getPoint(){
+        return this;
+    }
 }

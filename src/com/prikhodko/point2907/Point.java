@@ -31,5 +31,8 @@ return "Point{"+
         '}';
     }
 
+    public Point getPoint(){
+        return this;
+    }
 
 }

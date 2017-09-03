@@ -33,4 +33,8 @@ public class Point2D extends Point {
                 "}" + super.toString();
 
     }
+    @Override
+    public Point2D getPoint(){
+        return this;
+    }
 }
