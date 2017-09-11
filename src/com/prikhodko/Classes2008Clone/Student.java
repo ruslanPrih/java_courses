@@ -1,4 +1,4 @@
-package com.prikhodko.Classes2008;
+package com.prikhodko.Classes2008Clone;
 
 import java.util.Date;
 

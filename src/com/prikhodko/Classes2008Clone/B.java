@@ -1,7 +1,4 @@
-package com.prikhodko.Classes2008;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.prikhodko.Classes2008Clone;
 
 public class B {
 
