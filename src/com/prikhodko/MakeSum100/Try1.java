@@ -8,6 +8,7 @@ public class Try1 {
         int[] s1 = new int[9];
         int sum ;
         int i;
+
         do {
             String numb = "123456789";
             i = 0;
