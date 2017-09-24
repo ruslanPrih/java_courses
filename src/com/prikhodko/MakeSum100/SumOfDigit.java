@@ -42,6 +42,7 @@ public class SumOfDigit {
                 arrayOfCombinations[j]++;
 
             }
+
         }
 
         public static void calculationOfCombination(int[] arrayOfNumbers, int[] arrayOfCombinations,

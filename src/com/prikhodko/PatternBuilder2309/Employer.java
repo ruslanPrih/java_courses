@@ -16,14 +16,14 @@ import java.util.Date;
 */
 public class Employer extends BaseClass {
 
-    private final String name;
-    private final String lastName;
-    private final String middleName;
-    private final Gender gender;
-    private final FamilyStatus familyStatus;
-    private final Date birthdate;
-    private final double salary;
-    private final String position;
+    private String name;
+    private String lastName;
+    private String middleName;
+    private Gender gender;
+    private FamilyStatus familyStatus;
+    private Date birthdate;
+    private double salary;
+    private String position;
    // private int bonus;
 
 

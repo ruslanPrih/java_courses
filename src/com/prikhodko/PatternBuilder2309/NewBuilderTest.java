@@ -59,9 +59,9 @@ public class NewBuilderTest {
         Employer info1=new Employer.Builder("Sergey","Petrovich","Naaa")
         .familyStatus(FamilyStatus.SINGLE).build();
         System.out.println(info1);
-        System.out.println(new Employer.Builder("Ivan","Petrovich","Naaa"){
 
-        });
+
+
 
     }
 }
