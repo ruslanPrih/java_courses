@@ -1,7 +1,6 @@
 package com.prikhodko.MakeSum100.MaxFromArray;
-//Static Builder using
+//pattern Builder using just for fun
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,24 +9,24 @@ public class MaxFromArray {
     private int max;
 
     private MaxFromArray(BuilderGetArray build) {
-        this.array = build.array;
+        array = build.array;
         max = DoVariants();
     }
 
-    //doing number of variants
+    //doing array of variants
     private int DoVariants() {
         ArrayList<Integer> variants = new ArrayList();
         int variantCounter = 0;
         int n = array.length;
-        int var = 0;//variant of number
+        int variant = Integer.MIN_VALUE;//variant of number set
         while (variantCounter <= Math.pow(n, n)) {
             try {
-                var = Integer.parseInt(DoCombination());
+                variant = Integer.parseInt(DoCombination(array));
             } catch (NumberFormatException e) {
-                var = 0;
+                System.out.println(e);
             }
-            if (!variants.contains(var)) {
-                variants.add(variantCounter, var);
+            if (!variants.contains(variant)) {
+                variants.add(variant);
             }
             variantCounter++;
         }
@@ -35,30 +34,28 @@ public class MaxFromArray {
         return max;
     }
 
-    //make new combination
-    private String DoCombination() {
+    //make new combination with FisherYets shuffle algorithm
+    private String DoCombination(int[] arr) {
         String var = "";
-        int[] combinationArray = array;
-        int j = combinationArray.length - 1;
-        combinationArray[j]++;
-        while (combinationArray[j] == combinationArray.length) {
-            combinationArray[j] = 0;
-            if (j != 0) {
-                j--;
-            }
-            combinationArray[j]++;
+        int[] combinationArray = Arrays.copyOf(arr, arr.length);
+        int temp;
+
+        for (int i = combinationArray.length - 1; i > 0; i--) {
+            int index = (int) (Math.random() * (i + 1)); //
+            temp = combinationArray[index];
+            combinationArray[index] = combinationArray[i];
+            combinationArray[i] = temp;
         }
         for (int e : combinationArray
                 ) {
             var = var.concat(String.valueOf(e));
-
         }
         return var;
     }
 
-    private int FindMax(ArrayList<Integer> array) {
+    private int FindMax(ArrayList<Integer> arr) {
         int maxFromArray = Integer.MIN_VALUE;
-        for (Integer e : array
+        for (Integer e : arr
                 ) {
             if (e > maxFromArray) maxFromArray = e;
         }
