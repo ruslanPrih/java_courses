@@ -30,7 +30,7 @@ public class MaxFromArray {
             }
             variantCounter++;
         }
-        max = FindMax(variants);
+        max = new ArrayAnalis().FindMax(variants);
         return max;
     }
 
@@ -53,15 +53,27 @@ public class MaxFromArray {
         return var;
     }
 
-    private int FindMax(ArrayList<Integer> arr) {
-        int maxFromArray = Integer.MIN_VALUE;
-        for (Integer e : arr
+    /*
+        private int FindMax(ArrayList<Integer> arr) {
+            int maxFromArray = Integer.MIN_VALUE;
+            for (Integer e : arr
+                    ) {
+                if (e > maxFromArray) maxFromArray = e;
+            }
+            return maxFromArray;
+        }
+    */
+    /*
+    private <T extends Comparable>   T FindMax (ArrayList<T> arr) {
+        T maxFromArray = arr.get(0);
+        for (T e : arr
                 ) {
-            if (e > maxFromArray) maxFromArray = e;
+            if (e.compareTo(maxFromArray) > 0) maxFromArray = e;
         }
         return maxFromArray;
     }
 
+*/
     //Builder pattern
     public static class BuilderGetArray {
         final private int[] array;
