@@ -1,8 +1,8 @@
-package dbproject.repository.impl;
+package com.prikhodko.dbproject.repository.impl;
 
-import dbproject.domain.Student;
-import dbproject.domain.criteria.StudentCriteria;
-import dbproject.repository.StudentRepository;
+import com.prikhodko.dbproject.domain.Student;
+import com.prikhodko.dbproject.domain.criteria.StudentCriteria;
+import com.prikhodko.dbproject.repository.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class StudentInMemoryRepository implements StudentRepository {
     }
 
     @Override
-    public long add(Student student) {
+    public long create(Student student) {
         student.setId(++count);
         students.add(student);
         return student.getId();
@@ -80,6 +80,11 @@ public class StudentInMemoryRepository implements StudentRepository {
 
     @Override
     public void delete(long id) {
+
+    }
+
+    @Override
+    public void deleteAll() {
 
     }
 }

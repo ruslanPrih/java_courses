@@ -1,4 +1,4 @@
-package dbproject.domain.base;
+package com.prikhodko.dbproject.domain.base;
 
 import lombok.Getter;
 import lombok.Setter;

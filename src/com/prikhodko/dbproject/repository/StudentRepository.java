@@ -1,14 +1,15 @@
-package dbproject.repository;
+package com.prikhodko.dbproject.repository;
 
-import dbproject.domain.Student;
-import dbproject.domain.criteria.StudentCriteria;
+import com.prikhodko.dbproject.domain.Student;
+import com.prikhodko.dbproject.domain.criteria.StudentCriteria;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentRepository {
-    Student get(long id);
+    Student get(long id) ;
 
-    long add(Student student);
+    long create(Student student);
 
     void update(Student student);
 
@@ -23,4 +24,6 @@ public interface StudentRepository {
     List<Student> findAll();
 
     void delete(long id);
+
+    void deleteAll();
 }

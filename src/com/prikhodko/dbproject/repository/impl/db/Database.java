@@ -1,4 +1,4 @@
-package dbproject.repository.impl.db;
+package com.prikhodko.dbproject.repository.impl.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 

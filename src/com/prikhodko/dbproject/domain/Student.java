@@ -1,6 +1,6 @@
-package dbproject.domain;
+package com.prikhodko.dbproject.domain;
 
-import dbproject.domain.base.AbstractEntity;
+import com.prikhodko.dbproject.domain.base.AbstractEntity;
 import lombok.*;
 
 @Getter
